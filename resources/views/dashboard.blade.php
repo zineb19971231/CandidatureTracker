@@ -15,7 +15,7 @@
                 <div class="bg-white border border-gray-100 p-5 rounded-xl shadow-sm flex items-center justify-between">
                     <div class="space-y-1">
                         <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block">Total candidatures</span>
-                        <span class="text-3xl font-bold text-gray-900 block">{{ $Tot_candidatures }}</span>
+                        <span class="text-3xl font-bold text-gray-900 block">{{ $TotalCandidatures }}</span>
                     </div>
                     <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
                         <svg class="w-6 h-6 stroke-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

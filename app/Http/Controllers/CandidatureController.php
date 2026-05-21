@@ -9,20 +9,40 @@ use Illuminate\Http\Request;
 
 class CandidatureController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+ public function dashboard()
+{
+    // 1. Nombre total de candidatures
+    $TotalCandidatures = Candidature::count();
+
+    // 2. Compte par statut en utilisant directement Eloquent
+    $Tot_candidatures_en_attente   = Candidature::where('statut', 'En attente')->count();
+    $Tot_candidatures_acceptees   = Candidature::where('statut', 'Acceptee')->count();
+    $Tot_candidatures_rejetees    = Candidature::where('statut', 'Refusee')->count();
+    $Tot_candidatures_abondonnes = Candidature::where('statut', 'Abandonnee')->count();
+
+    // Envoi des compteurs à ta vue dashboard
+    return view('dashboard', compact(
+        'TotalCandidatures',
+        'Tot_candidatures_en_attente',
+        'Tot_candidatures_acceptees',
+        'Tot_candidatures_rejetees',
+        'Tot_candidatures_abondonnes'
+    ));
+}
+
     public function index()
     {
-        $candidatures = Candidature::all();
+        $candidatures = Candidature::where('user_id', auth()->id())->latest()->get();
         return view('candidature.index', compact('candidatures'));
     }
 
-  
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('candidature.create');
-        
     }
 
     /**
@@ -31,7 +51,7 @@ class CandidatureController extends Controller
     public function store(StoreCandidatureRequest $request)
     {
         Candidature::create($request->validated());
-        return redirect()->route('candidatures.index')->with('success', 'Candidature created successfully.');
+        return redirect()->route('candidature.index')->with('success', 'Candidature created successfully.');
     }
 
     /**
@@ -39,7 +59,7 @@ class CandidatureController extends Controller
      */
     public function show(Candidature $candidature)
     {
-        //
+        return view('candidature.show', compact('candidature'));
     }
 
     /**
@@ -47,7 +67,7 @@ class CandidatureController extends Controller
      */
     public function edit(Candidature $candidature)
     {
-        return view ('candidature.edit',);
+        return view('candidature.edit', compact('candidature'));
     }
 
     /**
@@ -55,16 +75,17 @@ class CandidatureController extends Controller
      */
     public function update(UpdateCandidatureRequest $request, Candidature $candidature)
     {
-        $data = $request->validated();
-        $candidature->update($data);
+        $candidature->update($request->validated());
         return redirect()->route('candidature.index')->with('success', 'Candidature updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Re
+     * move the specified resource from storage.
      */
     public function destroy(Candidature $candidature)
     {
-        //
+        $candidature->delete();
+        return redirect()->route('candidature.index')->with('success', 'Candidature deleted successfully.');
     }
 }
