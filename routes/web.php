@@ -10,17 +10,20 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    Route::get('/candidature', [CandidatureController::class, 'index'])
+    Route::get('/dashboard', [CandidatureController::class, 'dashboard'])
+        ->name('dashboard');
+    Route::get('/candidature/index', [CandidatureController::class, 'index'])
         ->name('candidature.index');
-
     Route::get('/candidature/create', [CandidatureController::class, 'create'])
         ->name('candidature.create');
     Route::post('/candidature', [CandidatureController::class, 'store'])
         ->name('candidature.store');
+    Route::get('/candidature/{candidature}', [CandidatureController::class, 'show'])
+        ->name('candidature.show');
+    Route::get('/candidature/{candidature}/edit', [CandidatureController::class, 'edit'])
+        ->name('candidature.edit');
+    Route::delete('/candidature/{candidature}', [CandidatureController::class, 'destroy'])
+        ->name('candidature.destroy');
 
 });
 Route::middleware('auth')->group(function () {
