@@ -16,7 +16,7 @@ class CandidatureController extends Controller
     $TotalCandidatures = Candidature::count();
 
     // 2. Compte par statut en utilisant directement Eloquent
-    $Tot_candidatures_en_attente   = Candidature::where('statut', 'En attente')->count();
+    $Tot_candidatures_en_attente   = Candidature::where('statut', 'a examiner')->count();
     $Tot_candidatures_acceptees   = Candidature::where('statut', 'Acceptee')->count();
     $Tot_candidatures_rejetees    = Candidature::where('statut', 'Refusee')->count();
     $Tot_candidatures_abondonnes = Candidature::where('statut', 'Abandonnee')->count();
