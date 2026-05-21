@@ -22,6 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('candidature.show');
     Route::get('/candidature/{candidature}/edit', [CandidatureController::class, 'edit'])
         ->name('candidature.edit');
+    Route::put('/candidature/{candidature}', [CandidatureController::class, 'update'])
+        ->name('candidature.update');
     Route::delete('/candidature/{candidature}', [CandidatureController::class, 'destroy'])
         ->name('candidature.destroy');
 
