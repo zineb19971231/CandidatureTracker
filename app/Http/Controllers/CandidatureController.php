@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCandidatureRequest;
+use App\Http\Requests\UpdateCandidatureRequest;
 use App\Models\Candidature;
 use Illuminate\Http\Request;
 
@@ -13,15 +14,8 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-
-    $candidatures =
-        Candidature::where('user_id', auth()->id())
-        ->latest()
-        ->get();
-
-    return view('candidatures.index', compact('candidatures')
-    );
-
+        $candidatures = Candidature::all();
+        return view('candidature.index', compact('candidatures'));
     }
 
   
@@ -36,8 +30,7 @@ class CandidatureController extends Controller
      */
     public function store(StoreCandidatureRequest $request)
     {
-        Candidature::create($request->validated() + ['user_id' => auth()->id()]);
-
+        Candidature::create($request->validated());
         return redirect()->route('candidatures.index')->with('success', 'Candidature created successfully.');
     }
 
@@ -54,15 +47,17 @@ class CandidatureController extends Controller
      */
     public function edit(Candidature $candidature)
     {
-        //
+        return view ('candidature.edit',);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Candidature $candidature)
+    public function update(UpdateCandidatureRequest $request, Candidature $candidature)
     {
-        //
+        $data = $request->validated();
+        $candidature->update($data);
+        return redirect()->route('candidature.index')->with('success', 'Candidature updated successfully.');
     }
 
     /**
