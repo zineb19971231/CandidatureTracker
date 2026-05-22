@@ -1,117 +1,255 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Créer une candidature
-            </h2>
+<x-slot name="header">
 
-            <a href="{{ route('dashboard') }}"
-               class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
-                ← Retour
-            </a>
-        </div>
-    </x-slot>
+<div class="flex items-center justify-between">
 
-    <div class="py-10 bg-gray-100 min-h-screen">
+<div>
 
-        <div class="max-w-4xl mx-auto px-6">
+<h2 class="text-2xl font-bold text-slate-900">
+Nouvelle candidature
+</h2>
 
-            <!-- CARD -->
-            <div class="bg-white shadow-lg rounded-2xl p-8">
+<p class="text-sm text-slate-500 mt-1">
+Applicant Tracking System
+</p>
 
-                <h3 class="text-xl font-bold text-gray-800 mb-6">
-                    Ajouter une nouvelle opportunité
-                </h3>
+</div>
 
-                <form method="POST" action="{{ route('candidature.store') }}" class="space-y-5">
-                    @csrf
+<a
+href="{{ route('dashboard') }}"
+class="px-5 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50"
+>
+Retour
+</a>
 
-                    <!-- Entreprise -->
-                    <div>
-                        <label class="text-sm font-medium text-gray-700">Nom de l'entreprise</label>
-                        <input type="text" name="nom_entreprise"
-                            class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            value="{{ old('nom_entreprise') }}">
-                    </div>
+</div>
 
-                    <!-- Poste -->
-                    <div>
-                        <label class="text-sm font-medium text-gray-700">Poste</label>
-                        <input type="text" name="poste"
-                            class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            value="{{ old('poste') }}">
-                    </div>
+</x-slot>
 
-                    <!-- URL -->
-                    <div>
-                        <label class="text-sm font-medium text-gray-700">URL de l'offre</label>
-                        <input type="url" name="url_offre"
-                            class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            value="{{ old('url_offre') }}">
-                    </div>
 
-                    <!-- GRID -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="min-h-screen bg-slate-50">
 
-                        <!-- Statut -->
-                        <div>
-                            <label class="text-sm font-medium text-gray-700">Statut</label>
-                            <select name="statut"
-                                class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+<div class="max-w-6xl mx-auto px-6 py-10">
 
-                                <option value="a examiner">À examiner</option>
-                                <option value="entretien programme">Entretien programmé</option>
-                                <option value="offre reçue">Offre reçue</option>
-                                <option value="refusee">Refusée</option>
-                                <option value="abandonnee">Abandonnée</option>
+<div class="bg-white rounded-3xl border border-slate-200 overflow-hidden">
 
-                            </select>
-                        </div>
+<form
+method="POST"
+action="{{ route('candidature.store') }}"
+class="p-8 space-y-8"
+>
 
-                        <!-- Priorité -->
-                        <div>
-                            <label class="text-sm font-medium text-gray-700">Priorité</label>
-                            <select name="priorite"
-                                class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+@csrf
 
-                                <option value="faible">Faible</option>
-                                <option value="moyenne" selected>Moyenne</option>
-                                <option value="haute">Haute</option>
 
-                            </select>
-                        </div>
+<!-- HERO -->
 
-                    </div>
+<div class="rounded-2xl bg-slate-50 p-6">
 
-                    <!-- Date -->
-                    <div>
-                        <label class="text-sm font-medium text-gray-700">Date de candidature</label>
-                        <input type="date" name="date_candidature"
-                            class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-                    </div>
+<h3 class="text-lg font-semibold text-slate-900">
+Créer une nouvelle opportunité
+</h3>
+</div>
 
-                    <!-- Notes -->
-                    <div>
-                        <label class="text-sm font-medium text-gray-700">Notes</label>
-                        <textarea name="notes" rows="4"
-                            class="w-full mt-1 rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
-                    </div>
 
-                    <!-- BUTTON -->
-                    <div class="flex justify-end">
-                        <button type="submit"
-                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                            Enregistrer
-                        </button>
-                    </div>
+<!-- ENTREPRISE + POSTE -->
 
-                </form>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            </div>
+<div>
 
-        </div>
+<label class="block mb-2 text-sm font-medium">
+Entreprise
+</label>
 
-    </div>
+<input
+type="text"
+name="nom_entreprise"
+value="{{ old('nom_entreprise') }}"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+placeholder="Google"
+>
+
+</div>
+
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Poste
+</label>
+
+<input
+type="text"
+name="poste"
+value="{{ old('poste') }}"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+placeholder="Frontend Developer"
+>
+
+</div>
+
+</div>
+
+
+
+<!-- URL -->
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Lien offre
+</label>
+
+<input
+type="url"
+name="url_offre"
+value="{{ old('url_offre') }}"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+placeholder="https://..."
+>
+
+</div>
+
+
+
+<!-- STATUS -->
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Statut
+</label>
+
+<select
+name="statut"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+>
+
+<option value="a examiner">
+À examiner
+</option>
+
+<option value="entretien programme">
+Entretien programmé
+</option>
+
+<option value="offre reçue">
+Offre reçue
+</option>
+
+<option value="refusee">
+Refusée
+</option>
+
+<option value="abandonnee">
+Abandonnée
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Priorité
+</label>
+
+<select
+name="priorite"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+>
+
+<option value="faible">
+Faible
+</option>
+
+<option value="moyenne" selected>
+Moyenne
+</option>
+
+<option value="haute">
+Haute
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Date candidature
+</label>
+
+<input
+type="date"
+name="date_candidature"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+>
+
+</div>
+
+</div>
+
+
+
+<!-- NOTES -->
+
+<div>
+
+<label class="block mb-2 text-sm font-medium">
+Notes
+</label>
+
+<textarea
+rows="5"
+name="notes"
+class="w-full rounded-2xl border border-slate-200 px-4 py-3"
+placeholder="Informations supplémentaires..."
+></textarea>
+
+</div>
+
+
+
+<!-- ACTIONS -->
+
+<div class="pt-6 border-t border-slate-200 flex justify-end gap-4">
+
+<a
+href="{{ route('dashboard') }}"
+class="px-6 py-3 rounded-2xl border border-slate-300"
+>
+
+Annuler
+
+</a>
+
+<button
+type="submit"
+class="px-6 py-3 rounded-2xl bg-blue-900 text-white hover:bg-blue-800"
+>
+
+Créer candidature
+
+</button>
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+</div>
 
 </x-app-layout>

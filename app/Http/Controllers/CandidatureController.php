@@ -59,7 +59,8 @@ class CandidatureController extends Controller
      */
     public function show(Candidature $candidature)
     {
-        return view('candidature.show', compact('candidature'));
+         
+        return view('candidature.show',compact('candidature'));
     }
 
     /**
