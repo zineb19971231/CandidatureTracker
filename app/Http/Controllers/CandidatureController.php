@@ -31,9 +31,14 @@ class CandidatureController extends Controller
     ));
 }
 
-    public function index()
+    public function index(request $request)
     {
-        $candidatures = Candidature::where('user_id', auth()->id())->latest()->get();
+        $query=Candidature::where('user_id',auth()->id());
+        // Search
+        if($request->search){
+           $query ->where('nom_entreprise','like', '%'. $request->search . '%');
+        }
+        $candidatures = $query->latest()->get();
         return view('candidature.index', compact('candidatures'));
     }
 
@@ -50,7 +55,9 @@ class CandidatureController extends Controller
      */
     public function store(StoreCandidatureRequest $request)
     {
-        Candidature::create($request->validated());
+        $data=$request->validated();
+        $data['user_id'] = auth()->id();
+        Candidature::create($data);
         return redirect()->route('candidature.index')->with('success', 'Candidature created successfully.');
     }
 
