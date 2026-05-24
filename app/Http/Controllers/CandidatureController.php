@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCandidatureRequest;
 use App\Http\Requests\UpdateCandidatureRequest;
 use App\Models\Candidature;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CandidatureController extends Controller
@@ -49,8 +50,8 @@ class CandidatureController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreCandidatureRequest $request)
-    {
-        Candidature::create($request->validated());
+    { 
+        auth()->user()->candidatures()->create($request->validated());
         return redirect()->route('candidature.index')->with('success', 'Candidature created successfully.');
     }
 

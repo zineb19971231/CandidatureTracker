@@ -24,9 +24,9 @@
         </a>
 
         <!-- Entretiens -->
-        <a href="#" 
-           class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-slate-400 hover:bg-slate-800/60 hover:text-slate-100">
-            <svg class="w-5 h-5 stroke-[2] text-slate-400 group-hover:text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="{{ route('entretiens.index') }}" 
+           class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group {{ request()->routeIs('entretiens.index') ? 'bg-blue-600 text-white shadow-md shadow-blue-600/10' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-100' }}">
+            <svg class="w-5 h-5 stroke-[2] {{ request()->routeIs('entretiens.index') ? 'text-white' : 'text-slate-400 group-hover:text-slate-200' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             <span class="font-medium text-sm">Entretiens</span>

@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 
 class EntretiensController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
-    {
-        //
-    }
+{
+    $entretiens = Entretien::with('candidature')->get();
 
+    return view('entretiens.index',compact('entretiens')
+    );
+}
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view ('entretiens.create');
     }
 
     /**
